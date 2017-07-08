@@ -1,6 +1,9 @@
 # PhpSerializer
 
-Native PHP serializer and unserializer(Note: currently only supports PHP primitive data-types) for Ruby and it is heavily inspired by PHP source code.
+Native PHP serializer and unserializer for Ruby.  It is heavily
+inspired by PHP source code.
+
+Note: Currently only supports PHP primitive data-types.
 
 ## Installation
 
