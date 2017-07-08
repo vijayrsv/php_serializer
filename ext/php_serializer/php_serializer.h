@@ -2,16 +2,17 @@
 #define PHP_SERIALIZER_H
 #include <sys/types.h>
 
-typedef struct {
+typedef struct
+{
   char *c;
   size_t len;
-  size_t a; //allocated_size
+  size_t a;                     //allocated_size
 } php_str;
 
-static VALUE serialize(VALUE module, VALUE in_data);
-static VALUE unserialize(VALUE module, VALUE in_data);
-static void serialize_intern(php_str *buf, VALUE in_data);
-static VALUE unserialize_intern(char **str_p, long *count, long limit);
+static VALUE serialize (VALUE module, VALUE in_data);
+static VALUE unserialize (VALUE module, VALUE in_data);
+static void serialize_intern (php_str * buf, VALUE in_data);
+static VALUE unserialize_intern (char **str_p, long *count, long limit);
 
 #define PHP_STR_PREALLOC 128
 #define PHP_STR_START_SIZE 78
