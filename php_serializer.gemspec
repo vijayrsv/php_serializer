@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   end
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-	s.extensions = %w[ext/php_serializer/extconf.rb]
+  spec.extensions = %w[ext/php_serializer/extconf.rb]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.15"
