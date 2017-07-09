@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Native PHP serializer and unserializer(Note: currently only supports PHP primitive data-types) for Ruby and it is heavily inspired by PHP source code.}
   spec.homepage      = "https://github.com/vijayrsv/php_serializer"
   spec.license       = "MIT"
+  spec.required_ruby_version = ">= 1.9.3"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
