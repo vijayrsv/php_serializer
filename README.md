@@ -18,6 +18,19 @@ Or install it yourself as:
 
     $ gem install php_serializer
 
+## Ruby versions supported
+
+Being a native gem, this library requires MRI (Matz's Ruby
+Interpreter).  It requires MRI 1.9.3 or greater.  It is known to build
+with these Ruby versions:
+
+* ruby-1.9.3
+* ruby-2.0
+* ruby-2.1
+* ruby-2.2
+* ruby-2.3
+* ruby-2.4
+
 ## Usage
 
 ``` ruby
