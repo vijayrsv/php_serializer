@@ -33,6 +33,8 @@ with these Ruby versions:
 * ruby-2.2
 * ruby-2.3
 * ruby-2.4
+* ruby-2.7
+* ruby-3.1
 
 ## Usage
 
@@ -43,6 +45,23 @@ PhpSerializer.unserialize('s:7:"example";')
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/vijayrsv/php_serializer.
+
+## Building from source
+### C file
+``` bash
+re2c -o ext/php_serializer/php_serializer.c ext/php_serializer/php_serializer.re
+```
+
+### Gem
+``` bash
+gem build php_serializer.gemspec
+gem install php_serializer-0.2.1.gem
+```
+
+### Running tests
+``` bash
+ruby -Ilib:test test/test_php_serializer.rb
+```
 
 ## License
 
