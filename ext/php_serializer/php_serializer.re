@@ -202,7 +202,7 @@ object = [OC];
 static VALUE
 unserialize_intern (unsigned char **p, unsigned char *max)
 {
-  VALUE rval = Qnil; 
+  VALUE rval = Qnil;
   unsigned char *cursor, *limit, *marker, *start;
 
   limit = max;
@@ -293,8 +293,8 @@ unserialize_intern (unsigned char **p, unsigned char *max)
   VALUE array = Qnil;
   VALUE h_key = Qnil;
   VALUE h_val = Qnil;
-  int is_array = 1;
-	long elements;
+  int is_array = true;
+  long elements;
 
   *p = YYCURSOR;
 
@@ -302,15 +302,27 @@ unserialize_intern (unsigned char **p, unsigned char *max)
   hash = rb_hash_new ();
   array = rb_ary_new ();
   for (long i = 0; i < elements; i++)
-    {
-      h_key = unserialize_intern (p, max);
-      h_val = unserialize_intern (p, max);
-      rb_hash_aset (hash, h_key, h_val);
-      if (TYPE (h_key) != T_FIXNUM || FIX2LONG (h_key) != i)
-        is_array = 0;
-      if (is_array)
-        rb_ary_push (array, h_val);
-    }
+  {
+    if (*p >= max)
+      rb_raise(rb_eTypeError, "Incomplete array.");
+    h_key = unserialize_intern (p, max);
+
+    if (*p >= max)
+      rb_raise(rb_eTypeError, "Incomplete array.");
+    h_val = unserialize_intern (p, max);
+
+    rb_hash_aset (hash, h_key, h_val);
+    if (TYPE (h_key) != T_FIXNUM || FIX2LONG (h_key) != i)
+      is_array = false;
+
+    if (is_array)
+      rb_ary_push (array, h_val);
+  }
+  if (is_array && RARRAY_LEN(array) != elements) {
+    rb_raise(rb_eTypeError, "Incomplete array.");
+  } else if (!is_array && RHASH_SIZE(hash) != elements) {
+    rb_raise(rb_eTypeError, "Incomplete hash.");
+  }
   *p += 1;
   rval = is_array ? array : hash;
   return rval;
